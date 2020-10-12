@@ -9,6 +9,26 @@
 
 </head>
 <body>
+
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+  include 'conexao.php';
+
+  $sql = "SELECT nivel_usuario FROM usuarios WHERE email_usuario = '$user' and status='Ativo'";
+  $buscar = mysqli_query($conexao, $sql);
+  $array = mysqli_fetch_array($buscar);
+  $nivel = $array['nivel_usuario'];
+
+  $array = mysqli_fetch_array($buscar);
+?>
     
     <div class="container" style=" margin-top: 40px; width: 500px">
     <h4>Cadastro de Categoria</h4>
@@ -19,7 +39,7 @@
             </div>
 
             <div style="text-align: right">
-            <a href="index.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
+            <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
             <button type="submit" class="btn btn-sm" style="background-color: #FF1168; color: #fff">Cadastrar</button>
             </div>
         </form>

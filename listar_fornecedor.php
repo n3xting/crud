@@ -10,9 +10,30 @@
 
 </head>
 <body>
+
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+  include 'conexao.php';
+
+  $sql = "SELECT nivel_usuario FROM usuarios WHERE email_usuario = '$user' and status='Ativo'";
+  $buscar = mysqli_query($conexao, $sql);
+  $array = mysqli_fetch_array($buscar);
+  $nivel = $array['nivel_usuario'];
+
+  $array = mysqli_fetch_array($buscar);
+
+?>
     <div class="container" style="margin-top: 40px;">
     <div style="text-align: right">
-        <a href="index.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
+        <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
     </div>
 
         <h3>Lista de Fornecedores</h3>
@@ -43,8 +64,21 @@
                 <td><?php echo $contato_fornProduto?></td>
                 <td><?php echo $email_fornProduto?></td>
                 <td>
-                    <a class="btn btn-warning btn-sm" style="color: #fff;" href="editar_fornecedor.php?id=<?php echo $id_fornProduto ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
-                    <a class="btn btn-danger btn-sm" style="color: #fff;" href="deletar_fornecedor.php?id=<?php echo $id_fornProduto ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Excluir</a>
+                <?php 
+
+                  if (($nivel == 1)||($nivel == 2)) {
+
+                ?>
+                  <a class="btn btn-warning btn-sm" style="color: #fff;" href="editar_fornecedor.php?id=<?php echo $id_fornProduto ?>" role="button"><i class="far fa-edit"></i>&nbsp;Editar</a>
+                <?php } ?>
+
+                <?php 
+
+                  if ($nivel == 1){
+
+                ?>
+                  <a class="btn btn-danger btn-sm" style="color: #fff;" href="deletar_fornecedor.php?id=<?php echo $id_fornProduto ?>" role="button"><i class="far fa-trash-alt"></i>&nbsp;Excluir</a>
+                <?php } ?>
                 </td>
             </tr>   
         <?php } ?>

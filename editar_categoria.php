@@ -27,6 +27,18 @@ $id = $_GET['id'];
 </head>
 <body>
 
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+?>
+
 <div class="container" id="tamanhoContainer">
         <h4>Cadastro</h4>
     <form action="_atualizar_categoria.php" method="post" style="margin-top: 20px">

@@ -27,6 +27,18 @@ $id = $_GET['id'];
 </head>
 <body>
 
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+?>
+
 <div class="container" id="tamanhoContainer">
         <h4>Cadastro</h4>
     <form action="_atualizar_produto.php" method="post" style="margin-top: 20px">
@@ -76,6 +88,7 @@ $id = $_GET['id'];
                 </select>
         </div>
         <div style="text-align: right;">
+            <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
             <button type="submit" id="botao" class="btn btn-sm" >Atualizar</button>
         </div>
     <?php } ?>

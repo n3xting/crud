@@ -20,6 +20,18 @@
 </head>
 <body>
 
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+?>
+
 <div class="container" id="tamanhoContainer">
         <h4>Cadastro</h4>
     <form action="_inserir_produto.php" method="post" style="margin-top: 20px">
@@ -69,7 +81,7 @@
                 </select>
         </div>
         <div style="text-align: right;">
-            <a href="index.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
+            <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
             <button type="submit" id="botao" class="btn btn-sm" >Cadastrar</button>
         </div>
     </form>

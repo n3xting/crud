@@ -9,6 +9,18 @@
 
 </head>
 <body>
+
+<?php 
+
+  session_start();
+
+  $user = $_SESSION['user'];
+
+  if (!isset($_SESSION['user'])) {
+    header('Location: index.php');
+  }
+
+?>
     
     <div class="container" style=" margin-top: 40px; width: 500px">
     <h4>Cadastro de Fornecedor</h4>
@@ -27,7 +39,7 @@
             </div>
 
             <div style="text-align: right">
-            <a href="index.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
+            <a href="menu.php" role="button" class="btn btn-sm btn-primary">Voltar</a>
             <button type="submit" class="btn btn-sm" style="background-color: #FF1168; color: #fff">Cadastrar</button>
             </div>
         </form>
